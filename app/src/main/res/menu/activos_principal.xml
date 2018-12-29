@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para las opciones de cerrar sesión de usuario para gestión de activos -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Sección para la opción cerrar sesión -->
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>

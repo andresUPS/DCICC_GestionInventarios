@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ec.edu.ups.gestioninventarios">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_icono_dcicc"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <activity
+            android:name=".Vistas.Activos.ActivosPrincipal"
+            android:label="@string/title_activity_activos_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Ticketing.TicketingPrincipal"
+            android:label="@string/title_activity_ticketing_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Activos.ActivosCQR"
+            android:label="@string/title_activity_activos_CQR"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Activos.ActivosDetalle"
+            android:label="@string/title_activity_activos_detalle"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Vistas.Activos.ActivosAccDetalle"
+            android:label="@string/title_activity_accesorio_detalle"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Vistas.Ticketing.TicketingCQR"
+            android:label="@string/title_activity_ticketing_cqr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Ticketing.TicketingDetalleCQR"
+            android:label="@string/title_activity_ticketing_detalle_cqr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Ticketing.TicketingDetalleGene"
+            android:label="@string/title_activity_ticketing_detalle_gene"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Vistas.Ticketing.TicketingConsulta"
+            android:label="@string/title_activity_ticketing_consulta"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Gestion de Inventarios y Ticketing</string>
+    
+    <!-- Strings related to login -->
+    <string name="prompt_email">Nick Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">El nick debe ser menor a 16 caracteres </string>
+    <string name="error_invalid_password">La contraseña debe ser mayor a 6 caracteres</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_field_required">Campo Obligatorio!</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_activos_principal">Gestión de Activos</string>
+    <string name="title_activity_activos_CQR">Escaner de Código QR</string>
+    <string name="title_activity_activos_usuario">Perfil de Usuario</string>
+    <string name="title_activity_activos_detalle">Detalle de Activo</string>
+    <string name="title_activity_accesorio_detalle">Detalle de Accesorio</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Salir</string>
+    <string name="title_activity_ticketing_principal">Tickets para soporte técnico</string>
+    <string name="title_activity_ticketing_cqr">Escaner de código QR</string>
+    <string name="title_activity_ticketing_detalle_cqr">Detalles de la incidencia de Activo</string>
+    <string name="title_activity_ticketing_detalle_gene">Detalles de la incidencia General</string>
+    <string name="title_activity_ticketing_consulta">Consulta de Tickets</string>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+
+    <string-array name="Estados">
+        <item>OPERATIVO</item>
+        <item>NO OPERATIVO</item>
+        <item>DE BAJA</item>
+    </string-array>
+
+    <string-array name="Estados_de_baja">
+        <item>DE BAJA</item>
+    </string-array>
+
+    <string-array name="Prioridad">
+        <item>URGENTE</item>
+        <item>ALTA</item>
+        <item>MEDIA</item>
+        <item>BAJA</item>
+    </string-array>
+
+</resources>

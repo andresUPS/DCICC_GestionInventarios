@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para las opciones de aceptar cambios de activos -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_guardar_activo"
+        android:icon="@mipmap/ic_aceptar"
+        android:title="Modificar"
+        app:showAsAction="ifRoom"/>
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_cancelar_activo"
+        android:icon="@mipmap/ic_cancelar"
+        android:title="Cerrar"
+        app:showAsAction="ifRoom"/>
+</menu>

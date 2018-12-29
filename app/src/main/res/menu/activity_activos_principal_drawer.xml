@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para las opciones de la barra de navegación de usuario para gestión de activos -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sección para las opciones principales -->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/cqr_inicio"
+            android:icon="@mipmap/ic_menu_inicio"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/cqr_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Consultar Activo/Accesorio" />
+        <!--<item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />-->
+    </group>
+    <!-- Sección para las opciones secundarias -->
+    <item android:title="Perfil de Usuario">
+        <menu>
+            <item
+                android:id="@+id/cerrar_sesion"
+                android:icon="@mipmap/ic_cerrar"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+
+</menu>

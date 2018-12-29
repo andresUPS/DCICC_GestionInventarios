@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para el contenido de la pantalla principal de usuario para gestión de activos
+  Opción Detalle Activos-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_activos_detalle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Vistas.Activos.ActivosDetalle"
+    tools:showIn="@layout/app_bar_activos_detalle">
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <ImageView
+                android:id="@+id/imagenCQRActivo"
+                android:layout_width="400px"
+                android:layout_height="400px"
+                android:layout_gravity="center"
+                android:layout_weight="2.11"
+                android:defaultFocusHighlightEnabled="true" />
+
+            <TextView
+                android:id="@+id/idQRActivo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary" />
+
+            <!-- Cuadro de texto para nombre de activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <AutoCompleteTextView
+                    android:id="@+id/NombreActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre Activo"
+                    android:maxLines="1"
+                    android:maxLength="150"
+                    android:singleLine="false"
+                    android:digits="ABCDEFGHIJKLMÑNOPQRSTUVWXYZ1234567890.-_/"
+                    android:inputType="textFilter"/>
+            </android.support.design.widget.TextInputLayout>
+            <!-- Cuadro de texto para nombre de activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/MarcaActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Marca Activo"
+                    android:maxLines="1"
+                    android:maxLength="150"
+                    android:singleLine="false"
+                    android:editable="false"
+                    android:inputType="none"/>
+            </android.support.design.widget.TextInputLayout>
+            <!-- Cuadro de texto para Modelo de Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/ModeloActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Modelo Activo"
+                    android:maxLines="3"
+                    android:maxLength="80"
+                    android:singleLine="false"
+                    android:inputType="text"
+                    android:digits="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 0123456789./-_#"/>
+            </android.support.design.widget.TextInputLayout>
+            <!-- Cuadro de texto para Serial de Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/SerialActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Serial Activo"
+                    android:maxLines="3"
+                    android:maxLength="150"
+                    android:singleLine="false"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_/.#"
+                    android:inputType="textFilter"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Cuadro de texto para Código UPSde Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/FechaAdquisicionActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fecha de Adqusición"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:digits="1234567890-/"
+                    android:inputType="datetime"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Cuadro de texto para Código UPSde Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/CustodioActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Custodio de Activo"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:editable="false"
+                    android:inputType="none"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Cuadro de texto para Código UPSde Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/CodUPSActivoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Código UPS"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:digits="1234567890"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- texto para Ubicación del activo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity=""
+                android:text="Ubicación del Activo: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1.34"
+                android:textColor="@color/colorAccent" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="left"
+                        android:padding="8dip"
+                        android:text="Laboratorio Actual:"
+                        android:layout_height="fill_parent" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:padding="8dip"
+                        android:text="Laboratorio Nuevo:"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <TextView
+                        android:id="@+id/LaboratorioActivoLbl"
+                        android:layout_width="0dp"
+                        android:gravity="left"
+                        android:padding="15dip"
+                        android:layout_weight="1"
+                        android:maxLines="3"
+                        android:text="Servidores"
+                        android:layout_height="fill_parent" />
+
+                    <!-- Combobox para laboratorio de activo-->
+                    <Spinner android:id="@+id/LaboratorioActivoCmb"
+                        android:gravity="left"
+                        android:layout_weight="1"
+                        android:padding="15dip"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"/>
+                </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- texto para estado del activo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity=""
+                android:text="Estado de Activo: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="2.78"
+                android:textColor="@color/colorAccent" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="left"
+                    android:padding="8dip"
+                    android:text="Estado Actual:"
+                    android:layout_height="fill_parent" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="8dip"
+                    android:text="Estado Nuevo:"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/EstadoActivoLbl"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:gravity="left"
+                    android:padding="15dip"
+                    android:maxLines="3"
+                    android:text="Dado de Baja"
+                    android:layout_height="fill_parent" />
+
+                <!-- Combobox para laboratorio de activo-->
+                <Spinner android:id="@+id/EstadoActivoCmb"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:padding="15dip"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

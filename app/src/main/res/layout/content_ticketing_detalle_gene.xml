@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para el contenido de la pantalla principal de usuario para ticketing
+    opción reportar incidencia general-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_ticketing_detalle_gene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Vistas.Ticketing.TicketingDetalleGene"
+    tools:showIn="@layout/app_bar_ticketing_detalle_gene">
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Laboratorio: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1.34"
+                android:textColor="@color/colorAccent" />
+            <!-- Combobox para el laboratorio de la incidencia general -->
+            <Spinner android:id="@+id/TicketLaboratorioGeneCmb"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:padding="15dip"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prioridad de la incidencia General: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1.34"
+                android:textColor="@color/colorAccent" />
+            <!-- Combobox para la prioridad de la incidencia de Activo -->
+            <Spinner android:id="@+id/TicketPrioridadGeneCmb"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:padding="15dip"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Cuadro de texto para descripción de la incidencia de Activo -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/TicketDescripcionGeneTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:inputType="text|textMultiLine"
+                    android:hint="Descripción de la incidencia General"
+                    android:lines="8"
+                    android:maxLines="5"
+                    android:maxLength="500"
+                    android:gravity="top"
+                    android:singleLine="false"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:digits="áéíóúÁÉÍÓÚ abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 0123456789?¡!¿./-_#%@,;:$*+"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

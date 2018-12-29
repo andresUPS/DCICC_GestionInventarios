@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Aplicación para la Gestión de Activos y ticketing para Soporte Técnico
+ *  Autores: Andres Chisaguano - Joel Ludeña
+ *  Descripción: Archivo de configuración xml para las opciones de la barra de navegación de usuario para ticketing -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sección para las opciones principales -->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/ticketing_inicio"
+            android:icon="@mipmap/ic_menu_inicio"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/ticketing_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Incidencia de Activos de TI" />
+        <item
+            android:id="@+id/ticketing_general"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Reportar Incidencia General" />
+        <!--<item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />-->
+    </group>
+    <!-- Sección para las opciones secundarias -->
+    <item android:title="Opciones">
+        <menu>
+            <item
+                android:id="@+id/consultar_tickets"
+                android:icon="@mipmap/ic_consulta"
+                android:title="Consultar Estado de Tickets" />
+            <item
+                android:id="@+id/cerrar_sesion_tickets"
+                android:icon="@mipmap/ic_cerrar"
+                android:title="Cerrar Sesión" />
+            <!--<item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />-->
+        </menu>
+    </item>
+
+</menu>
