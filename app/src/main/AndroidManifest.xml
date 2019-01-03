@@ -57,11 +57,13 @@
         <activity
             android:name=".Vistas.Ticketing.TicketingDetalleCQR"
             android:label="@string/title_activity_ticketing_detalle_cqr"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Vistas.Ticketing.TicketingDetalleGene"
             android:label="@string/title_activity_ticketing_detalle_gene"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Vistas.Ticketing.TicketingConsulta"
             android:label="@string/title_activity_ticketing_consulta"

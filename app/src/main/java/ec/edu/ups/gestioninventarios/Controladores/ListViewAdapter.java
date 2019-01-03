@@ -79,9 +79,6 @@ public class ListViewAdapter extends BaseAdapter {
         FilaTipo.setText(actLabAcc[position]);
         FilaResponsable.setText(responsables[position]);
         FilaComentario.setText(comentarios[position]);
-
-       /* txtDetalle.setText(detalles[position]);
-        imgImg.setImageResource(imagenes[position]);*/
         return itemView;
     }
 }
