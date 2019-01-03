@@ -144,12 +144,13 @@ public class LoginActivity extends AppCompatActivity {
                         showProgress(false);
                         Toast toast =
                                 Toast.makeText(getApplicationContext(),
-                                        "Usuario o Contraseña incorrectas", Toast.LENGTH_LONG);
+                                        "No cuenta con permisos para acceder al sistema", Toast.LENGTH_LONG);
                         toast.show();
                     }else if(mensaje.getObjetoInventarios().getNombreRol().equals("docente")){
                         this.myIntent = new Intent(LoginActivity.this, TicketingPrincipal.class);
                         myIntent.putExtra("ID_USUARIO_TICK",mensaje.getObjetoInventarios().getIdUsuario());
                         myIntent.putExtra("NICK_USUARIO_TICK", nick);
+                        myIntent.putExtra("NOMBRES_USUARIO_TICK", mensaje.getObjetoInventarios().getNombresUsuario());
                         myIntent.putExtra("CORREO_USUARIO_TICK",mensaje.getObjetoInventarios().getCorreoUsuario());
                         myIntent.putExtra("ID_ROL_TICK",mensaje.getObjetoInventarios().getIdRol());
                         myIntent.putExtra("NOMBRE_ROL_TICK",mensaje.getObjetoInventarios().getNombreRol());
@@ -159,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                         this.myIntent = new Intent(LoginActivity.this, TicketingPrincipal.class);
                         myIntent.putExtra("ID_USUARIO_TICK",mensaje.getObjetoInventarios().getIdUsuario());
                         myIntent.putExtra("NICK_USUARIO_TICK", nick);
+                        myIntent.putExtra("NOMBRES_USUARIO_TICK", mensaje.getObjetoInventarios().getNombresUsuario());
                         myIntent.putExtra("CORREO_USUARIO_TICK",mensaje.getObjetoInventarios().getCorreoUsuario());
                         myIntent.putExtra("ID_ROL_TICK",mensaje.getObjetoInventarios().getIdRol());
                         myIntent.putExtra("NOMBRE_ROL_TICK",mensaje.getObjetoInventarios().getNombreRol());
@@ -179,33 +181,11 @@ public class LoginActivity extends AppCompatActivity {
                             showProgress(false);
                             Toast toast =
                                     Toast.makeText(getApplicationContext(),
-                                            "Usuario o Contraseña incorrectas", Toast.LENGTH_LONG);
+                                            "No cuenta con permisos para acceder al sistema", Toast.LENGTH_LONG);
                             toast.show();
                         }
 
                     }
-                    /*if(mensaje.getObjetoInventarios().getNombreRol().equals("administrador") || mensaje.getObjetoInventarios().getNombreRol().equals("pasante")){
-                        this.myIntent = new Intent(LoginActivity.this, ActivosPrincipal.class);
-                        myIntent.putExtra("ID_USUARIO",mensaje.getObjetoInventarios().getIdUsuario());
-                        myIntent.putExtra("NICK_USUARIO", nick);
-                        myIntent.putExtra("CORREO_USUARIO",mensaje.getObjetoInventarios().getCorreoUsuario());
-                        myIntent.putExtra("ID_ROL",mensaje.getObjetoInventarios().getIdRol());
-                        myIntent.putExtra("NOMBRE_ROL",mensaje.getObjetoInventarios().getNombreRol());
-                        myIntent.putExtra("OPERACION","LOGIN");
-                        startActivity(myIntent);
-                    }else{
-                        this.myIntent = new Intent(LoginActivity.this, TicketingPrincipal.class);
-                        myIntent.putExtra("ID_USUARIO_TICK",mensaje.getObjetoInventarios().getIdUsuario());
-                        myIntent.putExtra("NICK_USUARIO_TICK", nick);
-                        myIntent.putExtra("CORREO_USUARIO_TICK",mensaje.getObjetoInventarios().getCorreoUsuario());
-                        myIntent.putExtra("ID_ROL_TICK",mensaje.getObjetoInventarios().getIdRol());
-                        myIntent.putExtra("NOMBRE_ROL_TICK",mensaje.getObjetoInventarios().getNombreRol());
-                        myIntent.putExtra("OPERACION_TICK","LOGIN");
-                        startActivity(myIntent);
-                    }*/
-
-
-
                 }else{
                     showProgress(false);
                     Toast toast =

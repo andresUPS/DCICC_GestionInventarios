@@ -47,6 +47,7 @@ public class TicketingDetalleCQR extends AppCompatActivity
     private String imagenActivoCQR,idImagenCqr;
     int idUsuarioActual=TicketingPrincipal.idUsuarioTicket;
     String nick=TicketingPrincipal.nickUsuarioTicket;
+    String nombresUsuario=TicketingPrincipal.nombresUsuarioTicket;
     String correo=TicketingPrincipal.correoUsuarioTicket;
     private int idActivoActual,idAccesorioActual;
 
@@ -144,11 +145,12 @@ public class TicketingDetalleCQR extends AppCompatActivity
         if (id == R.id.action_guardar_activo)  {
             String descripcionNuevo=descripcion.getText().toString();
             String prioridadNuevo=prioridad.getSelectedItem().toString();
+            String nomActAcc=nombreAct.getText().toString();
 
             if(comprobarCampos()){
 
                 MensajesTickets mensaje=
-                        ticket.ingresarTicketActAcc(nick,idUsuarioActual,idActivoActual,idAccesorioActual,descripcionNuevo,prioridadNuevo);
+                        ticket.ingresarTicketActAcc(nick,idUsuarioActual,nombresUsuario,idActivoActual,idAccesorioActual,descripcionNuevo,prioridadNuevo,nomActAcc);
 
                 if(mensaje.isOperacionExitosa()){
                     this.myIntent = new Intent(TicketingDetalleCQR.this, TicketingPrincipal.class);

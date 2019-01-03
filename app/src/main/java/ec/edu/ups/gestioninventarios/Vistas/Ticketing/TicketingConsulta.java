@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,38 +77,58 @@ public class TicketingConsulta extends AppCompatActivity
 
         ticketsUsuario=tickets.ticketsReportados(idUsuarioActual,nick);
 
-         if(operacionTicket.equals("TOTALES")){
-            int tamanoLista=ticketsUsuario.size();
-            String[] estados=new String[tamanoLista];
-            String[] fechaAperturas=new String[tamanoLista];
-            String[] responsables=new String[tamanoLista];
-            String[] comentarios=new String[tamanoLista];
-            for (int i = 0; i < ticketsUsuario.size() ; i++) {
-                if(ticketsUsuario.get(i).getEstadoTicket().equals("ABIERTO")){
-                    estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                    fechaAperturas[i]=ticketsUsuario.get(i).getFechaAperturaTicket();
-                    responsables[i]="";
-                    comentarios[i]=ticketsUsuario.get(i).getDescripcionTicket();
-                }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN PROCESO")){
-                    estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                    fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnProcesoTicket();
-                    responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                    comentarios[i]=ticketsUsuario.get(i).getComentarioEnProcesoTicket();
-                }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN ESPERA")){
-                    estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                    fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnEsperaTicket();
-                    responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                    comentarios[i]=ticketsUsuario.get(i).getComentarioEnEsperaTicket();
-                }else{
-                    estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                    fechaAperturas[i]=ticketsUsuario.get(i).getFechaResueltoTicket();
-                    responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                    comentarios[i]=ticketsUsuario.get(i).getComentarioResueltoTicket();
+        if(ticketsUsuario==null || ticketsUsuario.size()==0){
+            Toast toast =
+                    Toast.makeText(getApplicationContext(),
+                            "No existen tickets Reportados", Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            if(operacionTicket.equals("TOTALES")){
+                int tamanoLista=ticketsUsuario.size();
+                String[] estados=new String[tamanoLista];
+                String[] fechaAperturas=new String[tamanoLista];
+                String[] actLabAcc=new String[tamanoLista];
+                String[] responsables=new String[tamanoLista];
+                String[] comentarios=new String[tamanoLista];
+                for (int i = 0; i < ticketsUsuario.size() ; i++) {
+                    if(ticketsUsuario.get(i).getEstadoTicket().equals("ABIERTO")){
+                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaAperturaTicket();
+                        responsables[i]="";
+                        comentarios[i]=ticketsUsuario.get(i).getDescripcionTicket();
+                    }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN PROCESO")){
+                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnProcesoTicket();
+                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
+                        comentarios[i]=ticketsUsuario.get(i).getComentarioEnProcesoTicket();
+                    }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN ESPERA")){
+                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnEsperaTicket();
+                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
+                        comentarios[i]=ticketsUsuario.get(i).getComentarioEnEsperaTicket();
+                    }else{
+                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaResueltoTicket();
+                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
+                        comentarios[i]=ticketsUsuario.get(i).getComentarioResueltoTicket();
+                    }
+
+                    if(ticketsUsuario.get(i).getIdLaboratorio()!=0){
+                        actLabAcc[i]="Laboratorio: "+ticketsUsuario.get(i).getNombreLaboratorio();
+                    }else if(ticketsUsuario.get(i).getIdDetalleActivo()!=0){
+                        actLabAcc[i]="Activo: "+ticketsUsuario.get(i).getNombreDetalleActivo();
+                    }else{
+                        actLabAcc[i]="Accesorio: "+ticketsUsuario.get(i).getNombreAccesorio();
+                    }
+
+
                 }
+                adapter=new ListViewAdapter(this,estados,fechaAperturas,responsables,comentarios,actLabAcc);
+                lstCounts.setAdapter(adapter);
             }
-            adapter=new ListViewAdapter(this,estados,fechaAperturas,responsables,comentarios);
-            lstCounts.setAdapter(adapter);
         }
+
+
 
 
     }

@@ -30,6 +30,7 @@ import ec.edu.ups.gestioninventarios.Modelos.Usuarios;
 public class AutenticarUsuario {
 
     public static final String conexion="http://192.168.0.8/DCICC.WebServiceInventarios/";
+    //public static final String conexion="http://172.17.42.129/DCICC.WebServiceInventarios/";
 
     public MensajesUsuarios loginInicio(String nick,String password){
         String METODO_WS="AccesoServicio/AutenticarUsuario";
@@ -46,6 +47,8 @@ public class AutenticarUsuario {
             conn.setRequestProperty("Content-Type","application/json;charset=UTF-8");
             conn.setDoOutput(true);
             conn.setDoInput(true);
+            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(20000);
             conn.connect();
             //Métodos para enviar Datos al Web Service
             JSONObject jsonObjectEnvio=new JSONObject();
@@ -75,7 +78,7 @@ public class AutenticarUsuario {
                 //Método para setear el valor de operacion exitosa y el mensaje de error
                 mensajesUsuarios.setOperacionExitosa(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")));
                 mensajesUsuarios.setMensajeError(jsonObjectRetorno.optString("mensajeError"));
-                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))){
+                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")) && jsonObjectRetorno.optString("objetoInventarios").contains("idUsuario")){
                     //Método para llenar el modelo de Usuarios
                     Usuarios usuario=new Usuarios();
                     JSONObject jsonUsuario=new JSONObject(jsonObjectRetorno.optString("objetoInventarios"));
@@ -93,20 +96,24 @@ public class AutenticarUsuario {
                     mensajesUsuarios.setObjetoInventarios(usuario);
 
                 }else{
+                    mensajesUsuarios.setOperacionExitosa(false);
                     mensajesUsuarios.setObjetoInventarios(null);
                 }
                 return  mensajesUsuarios;
             }else{
+                mensajesUsuarios.setOperacionExitosa(false);
                 Log.e("VACIO ; ","NO VALIOOO");
-                return null;
+                return mensajesUsuarios;
             }
 
         } catch (Exception e) {
             conn.disconnect();
             e.printStackTrace();
+            mensajesUsuarios.setOperacionExitosa(false);
             Log.e("ERROR 1:  ", e.getMessage());
-            return null;
-        }finally {
+            return mensajesUsuarios;
+        }
+        finally {
             conn.disconnect();
         }
     }
@@ -148,7 +155,6 @@ public class AutenticarUsuario {
                 }
                 json="Bearer "+response.toString();
                 Log.e("OP ; ",json);
-
 
             }else{
 
@@ -300,9 +306,8 @@ public class AutenticarUsuario {
                 JSONObject jsonObjectRetorno = null;
                 jsonObjectRetorno=new JSONObject(json);
                 //Método para setear el valor de operacion exitosa y el mensaje de error
-                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))){
+                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))  && jsonObjectRetorno.optString("objetoInventarios").contains("activosOperativosCont")){
                     //Método para llenar el modelo de Usuarios
-
                     JSONObject jsonUsuario=new JSONObject(jsonObjectRetorno.optString("objetoInventarios"));
                     int [] datosTickets=
                             new int[]{Integer.parseInt(jsonUsuario.optString("activosOperativosCont")),
@@ -312,20 +317,22 @@ public class AutenticarUsuario {
                     Log.e("ticketsAbiertos", String.valueOf(datosTickets[2]));
                     return datosTickets;
                 }else{
-                    int [] datosTickets;
-                    return datosTickets=null;
+                    int [] datosTickets = new int[]{0,0,0};
+                    return datosTickets;
                 }
 
             }else{
                 Log.e("VACIO ; ","NO VALIOOO");
-                return null;
+                int [] datosTickets = new int[]{0,0,0};
+                return datosTickets;
             }
 
         } catch (Exception e) {
             conn.disconnect();
             e.printStackTrace();
             Log.e("ERROR 1:  ", e.getMessage());
-            return null;
+            int [] datosTickets = new int[]{0,0,0};
+            return datosTickets;
         }finally {
             conn.disconnect();
         }
@@ -371,9 +378,8 @@ public class AutenticarUsuario {
                 JSONObject jsonObjectRetorno = null;
                 jsonObjectRetorno=new JSONObject(json);
                 //Método para setear el valor de operacion exitosa y el mensaje de error
-                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))){
+                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")) && jsonObjectRetorno.optString("objetoInventarios").contains("permisoActivos")){
                     //Método para llenar el modelo de Usuarios
-
                     JSONObject jsonUsuario=new JSONObject(jsonObjectRetorno.optString("objetoInventarios"));
                     boolean [] datosRoles=
                             new boolean[]{Boolean.parseBoolean(jsonUsuario.optString("permisoActivos"))};;
@@ -381,20 +387,22 @@ public class AutenticarUsuario {
                     Log.e("Permiso rol: ", String.valueOf(datosRoles[0]));
                     return datosRoles;
                 }else{
-                    boolean [] datosRoles;
-                    return datosRoles=null;
+                    boolean [] datosRoles = new boolean[]{false};
+                    return datosRoles;
                 }
 
             }else{
                 Log.e("VACIO ; ","NO VALIOOO");
-                return null;
+                boolean [] datosRoles = new boolean[]{false};
+                return datosRoles;
             }
 
         } catch (Exception e) {
             conn.disconnect();
             e.printStackTrace();
             Log.e("ERROR 1:  ", e.getMessage());
-            return null;
+            boolean [] datosRoles = new boolean[]{false};
+            return datosRoles;
         }finally {
             conn.disconnect();
         }

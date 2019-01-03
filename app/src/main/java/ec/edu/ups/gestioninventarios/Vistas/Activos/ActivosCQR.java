@@ -27,7 +27,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -56,6 +55,8 @@ public class ActivosCQR extends AppCompatActivity
     final int permisosCamara = 1001;
     String nick=ActivosPrincipal.nickUsuario;
     String correo=ActivosPrincipal.correoUsuario;
+    private String palabra = "";
+    private String palabraAnterior = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,70 +215,98 @@ public class ActivosCQR extends AppCompatActivity
                 SparseArray<Barcode> cqr=detections.getDetectedItems();
                 //Método para obtener el texto del scanner
                 if (cqr.size() !=0){
-                    String elemento=cqr.valueAt(0).displayValue;
+                    palabra=cqr.valueAt(0).displayValue;
+                    Log.e("Pal ant ant ",palabraAnterior);
+                    if(!palabra.equals(palabraAnterior)){
+                        palabraAnterior=palabra;
+                        Log.e("Pal ant ",palabraAnterior);
+                        String parteIdentificacion=instanciaActivo(palabraAnterior);
 
-                    String parteIdentificacion=instanciaActivo(elemento);
 
+                        if (parteIdentificacion.equals("ACT")){
+                            String nick=ActivosPrincipal.nickUsuario;
+                            MetodosActivos activos=new MetodosActivos();
+                            MensajesActivos mensaje=activos.datosActivosCQR(palabraAnterior,nick);
 
-                    if (parteIdentificacion.equals("ACT")){
-                        String nick=ActivosPrincipal.nickUsuario;
-                        MetodosActivos activos=new MetodosActivos();
-                        MensajesActivos mensaje=activos.datosActivosCQR(elemento,nick);
+                            if(mensaje.isOperacionExitosa()){
+                                this.myIntent = new Intent(ActivosCQR.this,ActivosDetalle.class);
+                                myIntent.putExtra("ID_ACTIVO", mensaje.getObjetoInventarios().getIdActivo());
+                                myIntent.putExtra("ID_LABORATORIO", mensaje.getObjetoInventarios().getIdLaboratorio());
+                                myIntent.putExtra("NOMBRE_LABORATORIO",mensaje.getObjetoInventarios().getNombreLaboratorio());
+                                myIntent.putExtra("NOMBRE_MARCA",mensaje.getObjetoInventarios().getNombreMarca());
+                                myIntent.putExtra("NOMBRE_ACTIVO",mensaje.getObjetoInventarios().getNombreActivo());
+                                myIntent.putExtra("MODELO_ACTIVO",mensaje.getObjetoInventarios().getModeloActivo());
+                                myIntent.putExtra("SERIAL_ACTIVO", mensaje.getObjetoInventarios().getSerialActivo());
+                                myIntent.putExtra("FECHA_ACTIVO", mensaje.getObjetoInventarios().getFechaIngresoActivo());
+                                myIntent.putExtra("CUSTODIO_ACTIVO", mensaje.getObjetoInventarios().getResponsableActivo());
+                                myIntent.putExtra("ESTADO_ACTIVO", mensaje.getObjetoInventarios().getEstadoActivo());
+                                myIntent.putExtra("CODIGOUPS_ACTIVO", mensaje.getObjetoInventarios().getCodigoUpsActivo());
+                                myIntent.putExtra("CQR_ACTIVO", mensaje.getObjetoInventarios().getCadenaCQR());
+                                myIntent.putExtra("ID_CQR_ACTIVO", palabraAnterior);
+                                startActivity(myIntent);
 
-                        if(mensaje.isOperacionExitosa()){
-                            this.myIntent = new Intent(ActivosCQR.this,ActivosDetalle.class);
-                            myIntent.putExtra("ID_ACTIVO", mensaje.getObjetoInventarios().getIdActivo());
-                            myIntent.putExtra("ID_LABORATORIO", mensaje.getObjetoInventarios().getIdLaboratorio());
-                            myIntent.putExtra("NOMBRE_LABORATORIO",mensaje.getObjetoInventarios().getNombreLaboratorio());
-                            myIntent.putExtra("NOMBRE_MARCA",mensaje.getObjetoInventarios().getNombreMarca());
-                            myIntent.putExtra("NOMBRE_ACTIVO",mensaje.getObjetoInventarios().getNombreActivo());
-                            myIntent.putExtra("MODELO_ACTIVO",mensaje.getObjetoInventarios().getModeloActivo());
-                            myIntent.putExtra("SERIAL_ACTIVO", mensaje.getObjetoInventarios().getSerialActivo());
-                            myIntent.putExtra("FECHA_ACTIVO", mensaje.getObjetoInventarios().getFechaIngresoActivo());
-                            myIntent.putExtra("CUSTODIO_ACTIVO", mensaje.getObjetoInventarios().getResponsableActivo());
-                            myIntent.putExtra("ESTADO_ACTIVO", mensaje.getObjetoInventarios().getEstadoActivo());
-                            myIntent.putExtra("CODIGOUPS_ACTIVO", mensaje.getObjetoInventarios().getCodigoUpsActivo());
-                            myIntent.putExtra("CQR_ACTIVO", mensaje.getObjetoInventarios().getCadenaCQR());
-                            myIntent.putExtra("ID_CQR_ACTIVO", elemento);
+                            }else {
+                                this.myIntent = new Intent(ActivosCQR.this, ActivosPrincipal.class);
+                                myIntent.putExtra("OPERACION","NO_CQR");
+                                startActivity(myIntent);
+                                /*Toast toast =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Se ha Producido un error", Toast.LENGTH_LONG);
+                                toast.show();*/
+                            }
+
+                        }else if(parteIdentificacion.equals("ACC")){
+                            String nick=ActivosPrincipal.nickUsuario;
+                            MetodosAccesorios accesorios=new MetodosAccesorios();
+                            MensajesAccesorios mensaje=accesorios.datosAccesoriosCQR(palabraAnterior,nick);
+
+                            if(mensaje.isOperacionExitosa()){
+                                this.myIntent = new Intent(ActivosCQR.this,ActivosAccDetalle.class);
+                                myIntent.putExtra("ID_ACCESORIO", mensaje.getObjetoInventarios().getIdAccesorio());
+                                myIntent.putExtra("NOMBRE_TIPO_ACC",mensaje.getObjetoInventarios().getNombreTipoAccesorio());
+                                myIntent.putExtra("NOMBRE_ACTIVO_ACC",mensaje.getObjetoInventarios().getNombreDetalleActivo());
+                                myIntent.putExtra("NOMBRE_ACCESORIO",mensaje.getObjetoInventarios().getNombreAccesorio());
+                                myIntent.putExtra("MODELO_ACCESORIO",mensaje.getObjetoInventarios().getModeloAccesorio());
+                                myIntent.putExtra("SERIAL_ACCESORIO", mensaje.getObjetoInventarios().getSerialAccesorio());
+                                myIntent.putExtra("ESTADO_ACCESORIO", mensaje.getObjetoInventarios().getEstadoAccesorio());
+                                myIntent.putExtra("CQR_ACCESORIO", mensaje.getObjetoInventarios().getCadenaAccesorioCQR());
+                                myIntent.putExtra("ID_CQR_ACCESORIO", palabraAnterior);
+                                startActivity(myIntent);
+
+                            }else {
+                                this.myIntent = new Intent(ActivosCQR.this, ActivosPrincipal.class);
+                                myIntent.putExtra("OPERACION","NO_CQR");
+                                startActivity(myIntent);
+                                /*Toast toast =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Se ha Producido un error", Toast.LENGTH_LONG);
+                                toast.show();*/
+                            }
+
+                        }else{
+                            this.myIntent = new Intent(ActivosCQR.this, ActivosPrincipal.class);
+                            myIntent.putExtra("OPERACION","NO_CQR");
                             startActivity(myIntent);
-
-                        }else {
-                            Toast toast =
-                                    Toast.makeText(getApplicationContext(),
-                                            "Se ha Producido un error", Toast.LENGTH_LONG);
-                            toast.show();
                         }
 
-                    }else if(parteIdentificacion.equals("ACC")){
-                        String nick=ActivosPrincipal.nickUsuario;
-                        MetodosAccesorios accesorios=new MetodosAccesorios();
-                        MensajesAccesorios mensaje=accesorios.datosAccesoriosCQR(elemento,nick);
+                        new Thread(new Runnable() {
+                            public void run() {
+                                try {
+                                    synchronized (this) {
+                                        wait(5000);
+                                        // limpiamos el token
+                                        palabraAnterior = "";
+                                    }
+                                } catch (InterruptedException e) {
+                                    // TODO Auto-generated catch block
+                                    Log.e("Error", "Waiting didnt work!!");
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
 
-                        if(mensaje.isOperacionExitosa()){
-                            this.myIntent = new Intent(ActivosCQR.this,ActivosAccDetalle.class);
-                            myIntent.putExtra("ID_ACCESORIO", mensaje.getObjetoInventarios().getIdAccesorio());
-                            myIntent.putExtra("NOMBRE_TIPO_ACC",mensaje.getObjetoInventarios().getNombreTipoAccesorio());
-                            myIntent.putExtra("NOMBRE_ACTIVO_ACC",mensaje.getObjetoInventarios().getNombreDetalleActivo());
-                            myIntent.putExtra("NOMBRE_ACCESORIO",mensaje.getObjetoInventarios().getNombreAccesorio());
-                            myIntent.putExtra("MODELO_ACCESORIO",mensaje.getObjetoInventarios().getModeloAccesorio());
-                            myIntent.putExtra("SERIAL_ACCESORIO", mensaje.getObjetoInventarios().getSerialAccesorio());
-                            myIntent.putExtra("ESTADO_ACCESORIO", mensaje.getObjetoInventarios().getEstadoAccesorio());
-                            myIntent.putExtra("CQR_ACCESORIO", mensaje.getObjetoInventarios().getCadenaAccesorioCQR());
-                            myIntent.putExtra("ID_CQR_ACCESORIO", elemento);
-                            startActivity(myIntent);
-
-                        }else {
-                            Toast toast =
-                                    Toast.makeText(getApplicationContext(),
-                                            "Se ha Producido un error", Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-
-                    }else{
-                        this.myIntent = new Intent(ActivosCQR.this, ActivosPrincipal.class);
-                        myIntent.putExtra("OPERACION","NO_CQR");
-                        startActivity(myIntent);
                     }
+
 
 
                 }
@@ -310,11 +339,15 @@ public class ActivosCQR extends AppCompatActivity
 
     public String instanciaActivo(String elemento){
         Log.e("elemento ",elemento);
+        String parteIdentificacion="";
         String[] parts = elemento.split("\\.");
-        Log.e("CQR: ", Arrays.toString(parts));
-        String parteIdentificación = parts[1];
-        Log.e("CQR: ", parteIdentificación);
-        return parteIdentificación;
+        if (parts.length > 1){
+            Log.e("CQR: ", Arrays.toString(parts));
+            parteIdentificacion = parts[1];
+            Log.e("CQR: ", parteIdentificacion);
+        }
+
+        return parteIdentificacion;
     }
 
 

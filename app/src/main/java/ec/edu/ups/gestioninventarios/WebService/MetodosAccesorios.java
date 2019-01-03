@@ -67,12 +67,16 @@ public class MetodosAccesorios {
                 //Método para obtener los valores del web service
                 JSONObject jsonObjectRetorno = null;
                 jsonObjectRetorno=new JSONObject(json);
+                Log.e("Estado Accesorio", jsonObjectRetorno.optString("operacionExitosa"));
                 //Método para setear el valor de operacion exitosa y el mensaje de error
                 mensajesAccesorios.setOperacionExitosa(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")));
                 mensajesAccesorios.setMensajeError(jsonObjectRetorno.optString("mensajeError"));
-                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))){
+                Log.e("Estado Accesorio", jsonObjectRetorno.optString("objetoInventarios"));
+
+                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")) && jsonObjectRetorno.optString("objetoInventarios").contains("idAccesorio") ){
                     //Método para llenar el modelo de Usuarios
                     Accesorios accesorio=new Accesorios();
+                    Log.e("Estado", "entro");
                     JSONObject jsonAccesorio=new JSONObject(jsonObjectRetorno.optString("objetoInventarios"));
                     accesorio.setIdAccesorio(Integer.parseInt(jsonAccesorio.optString("idAccesorio")));
                     accesorio.setNombreDetalleActivo(jsonAccesorio.optString("nombreDetalleActivo"));
@@ -85,6 +89,7 @@ public class MetodosAccesorios {
 
                     mensajesAccesorios.setObjetoInventarios(accesorio);
                 }else{
+                    mensajesAccesorios.setOperacionExitosa(false);
                     mensajesAccesorios.setObjetoInventarios(null);
                 }
                 return  mensajesAccesorios;

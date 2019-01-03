@@ -19,6 +19,13 @@ android {
         }
     }
     sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/2'] } }
+    /*testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.all {
+            // All the usual Gradle options.
+            jvmArgs '-XX:MaxPermSize=256m'
+        }
+    }*/
 }
 
 repositories{
@@ -33,6 +40,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
+    //testCompile 'org.mockito:mockito-core:1.9.5'
+    //testCompile 'org.json:json:20180130'
     compile 'com.google.android.gms:play-services-vision:9.8.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
 }

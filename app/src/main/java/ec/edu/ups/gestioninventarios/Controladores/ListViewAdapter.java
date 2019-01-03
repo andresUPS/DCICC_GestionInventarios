@@ -23,15 +23,17 @@ public class ListViewAdapter extends BaseAdapter {
     String[] fechaAperturas;
     String[] responsables;
     String[] comentarios;
+    String[] actLabAcc;
     LayoutInflater inflater;
 
     //Método para traer los datos de los tickets
-    public ListViewAdapter(Context context,String[] estado, String[] fechaApertura, String[] responsable, String[] comentario) {
+    public ListViewAdapter(Context context,String[] estado, String[] fechaApertura, String[] responsable, String[] comentario,String[] actLabAcc) {
         this.context = context;
         this.estados = estado;
         this.fechaAperturas = fechaApertura;
         this.responsables = responsable;
         this.comentarios = comentario;
+        this.actLabAcc=actLabAcc;
     }
 
     //Método para obtener la longitud del array
@@ -54,6 +56,7 @@ public class ListViewAdapter extends BaseAdapter {
         // Declaración de Variables
         EditText FilaEstado;
         EditText  FilaFechaApertura;
+        EditText  FilaTipo;
         EditText  FilaResponsable;
         EditText  FilaComentario;
         LayoutInflater inflater;
@@ -66,12 +69,14 @@ public class ListViewAdapter extends BaseAdapter {
         // Localiza los TextViews en listitem_ticketing_consulta.xml
         FilaEstado = (EditText) itemView.findViewById(R.id.estado);
         FilaFechaApertura = (EditText) itemView.findViewById(R.id.fechaApertura);
+        FilaTipo = (EditText) itemView.findViewById(R.id.tipoReporte);
         FilaResponsable = (EditText) itemView.findViewById(R.id.responsable);
         FilaComentario = (EditText) itemView.findViewById(R.id.comentario);
 
         // Captura la posición y agrega valores a los TextViews
         FilaEstado.setText(estados[position]);
         FilaFechaApertura.setText(fechaAperturas[position]);
+        FilaTipo.setText(actLabAcc[position]);
         FilaResponsable.setText(responsables[position]);
         FilaComentario.setText(comentarios[position]);
 

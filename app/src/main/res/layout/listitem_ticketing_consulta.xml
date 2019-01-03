@@ -47,6 +47,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
+            android:id="@+id/tipoReporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Activo, Accesorio o Laboratorio:"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:editable="false"
+            android:inputType="none"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Cuadro de texto para Código UPSde Activo -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
             android:id="@+id/responsable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

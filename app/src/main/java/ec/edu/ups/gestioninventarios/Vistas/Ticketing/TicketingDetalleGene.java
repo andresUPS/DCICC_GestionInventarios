@@ -46,6 +46,7 @@ public class TicketingDetalleGene extends AppCompatActivity
     ArrayList<Laboratorios> listaLabs;
     int idUsuarioActual=TicketingPrincipal.idUsuarioTicket;
     String nick=TicketingPrincipal.nickUsuarioTicket;
+    String nombresUsuario=TicketingPrincipal.nombresUsuarioTicket;
     String correo=TicketingPrincipal.correoUsuarioTicket;
     MetodosTickets ticket=new MetodosTickets();
 
@@ -122,11 +123,12 @@ public class TicketingDetalleGene extends AppCompatActivity
             int posFInal=laboratorios.getSelectedItemPosition();
             //Log.e("Posicion lab", String.valueOf(posFInal));
             int idLabFinal=listaLabs.get(posFInal).getIdLaboratorio();
+            String nombreLabFinal=listaLabs.get(posFInal).getNombreLaboratorio();
 
             if(comprobarCampos()){
 
                 MensajesTickets mensaje=
-                        ticket.ingresarTicketGeneral(nick,idUsuarioActual,idLabFinal,descripcionNuevo,prioridadNuevo);
+                        ticket.ingresarTicketGeneral(nick,idUsuarioActual,nombresUsuario,idLabFinal,nombreLabFinal,descripcionNuevo,prioridadNuevo);
 
                 if(mensaje.isOperacionExitosa()){
                     this.myIntent = new Intent(TicketingDetalleGene.this, TicketingPrincipal.class);
@@ -210,12 +212,22 @@ public class TicketingDetalleGene extends AppCompatActivity
     public void llenarSpinnerLaboratorios(){
         MetodosActivos activo=new MetodosActivos();
         listaLabs=activo.laboratoriosHabilitados(nick);
-        listaLaboratorios=new String[listaLabs.size()];
-        for (int i = 0; i < listaLabs.size(); i++) {
-            listaLaboratorios[i]=listaLabs.get(i).getNombreLaboratorio();
+        if (listaLabs==null || listaLabs.size()==0){
+            this.myIntent = new Intent(TicketingDetalleGene.this, TicketingPrincipal.class);
+            myIntent.putExtra("OPERACION_TICK","LLENAR_ACTIVO");
+            startActivity(myIntent);
+            Toast toast =
+                    Toast.makeText(getApplicationContext(),
+                            "No existen datos de laboratorios", Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            listaLaboratorios=new String[listaLabs.size()];
+            for (int i = 0; i < listaLabs.size(); i++) {
+                listaLaboratorios[i]=listaLabs.get(i).getNombreLaboratorio();
+            }
+            ArrayAdapter spinnerArrayAdapterLabs = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, listaLaboratorios);
+            laboratorios.setAdapter(spinnerArrayAdapterLabs);
         }
-        ArrayAdapter spinnerArrayAdapterLabs = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item, listaLaboratorios);
-        laboratorios.setAdapter(spinnerArrayAdapterLabs);
     }
 
     private boolean comprobarCampos() {

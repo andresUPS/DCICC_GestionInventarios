@@ -56,6 +56,8 @@ public class TicketingCQR extends AppCompatActivity
 
     String nick=TicketingPrincipal.nickUsuarioTicket;
     String correo=TicketingPrincipal.correoUsuarioTicket;
+    private String palabra = "";
+    private String palabraAnterior = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,63 +233,90 @@ public class TicketingCQR extends AppCompatActivity
                 SparseArray<Barcode> cqr=detections.getDetectedItems();
                 //Método para obtener el texto del scanner
                 if (cqr.size() !=0){
-                    String elemento=cqr.valueAt(0).displayValue;
-                    String parteIdentificacion=instanciaActivo(elemento);
-                    if (parteIdentificacion.equals("ACT")){
+                    palabra=cqr.valueAt(0).displayValue;
+                    if(!palabra.equals(palabraAnterior)) {
+                        palabraAnterior = palabra;
+                        String parteIdentificacion=instanciaActivo(palabraAnterior);
+                        if (parteIdentificacion.equals("ACT")){
 
-                        MetodosActivos activos=new MetodosActivos();
-                        MensajesActivos mensaje=activos.datosActivosCQR(elemento,nick);
+                            MetodosActivos activos=new MetodosActivos();
+                            MensajesActivos mensaje=activos.datosActivosCQR(palabraAnterior,nick);
 
-                        if(mensaje.isOperacionExitosa()){
-                            this.myIntent = new Intent(TicketingCQR.this,TicketingDetalleCQR.class);
-                            myIntent.putExtra("ID_ACTIVO_TICKET", mensaje.getObjetoInventarios().getIdActivo());
-                            myIntent.putExtra("ID_ACCEROSIO_TICKET", 0);
-                            myIntent.putExtra("NOMBRE_LABORATORIO_TICKET",mensaje.getObjetoInventarios().getNombreLaboratorio());
-                            myIntent.putExtra("NOMBRE_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getNombreActivo());
-                            myIntent.putExtra("MODELO_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getModeloActivo());
-                            myIntent.putExtra("SERIAL_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getSerialActivo());
-                            myIntent.putExtra("ESTADO_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getEstadoActivo());
-                            myIntent.putExtra("CQR_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getCadenaCQR());
-                            myIntent.putExtra("ID_CQR_ACT_ACC_TICKET", elemento);
-                            startActivity(myIntent);
+                            if(mensaje.isOperacionExitosa()){
+                                this.myIntent = new Intent(TicketingCQR.this,TicketingDetalleCQR.class);
+                                myIntent.putExtra("ID_ACTIVO_TICKET", mensaje.getObjetoInventarios().getIdActivo());
+                                myIntent.putExtra("ID_ACCEROSIO_TICKET", 0);
+                                myIntent.putExtra("NOMBRE_LABORATORIO_TICKET",mensaje.getObjetoInventarios().getNombreLaboratorio());
+                                myIntent.putExtra("NOMBRE_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getNombreActivo());
+                                myIntent.putExtra("MODELO_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getModeloActivo());
+                                myIntent.putExtra("SERIAL_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getSerialActivo());
+                                myIntent.putExtra("ESTADO_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getEstadoActivo());
+                                myIntent.putExtra("CQR_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getCadenaCQR());
+                                myIntent.putExtra("ID_CQR_ACT_ACC_TICKET", palabraAnterior);
+                                startActivity(myIntent);
 
-                        }else {
-                            Log.e("NO VALIO","NO VALIO");
+                            }else {
+                                this.myIntent = new Intent(TicketingCQR.this, TicketingPrincipal.class);
+                                myIntent.putExtra("OPERACION_TICK","NO_CQR");
+                                startActivity(myIntent);
+                                Log.e("NO VALIO","NO VALIO");
                             /*Toast toast =
                                     Toast.makeText(getApplicationContext(),
                                             "Se ha Producido un error", Toast.LENGTH_LONG);
                             toast.show();*/
-                        }
+                            }
 
-                    }else if(parteIdentificacion.equals("ACC")){
-                        MetodosAccesorios accesorios=new MetodosAccesorios();
-                        MensajesAccesorios mensaje=accesorios.datosAccesoriosCQR(elemento,nick);
+                        }else if(parteIdentificacion.equals("ACC")){
+                            MetodosAccesorios accesorios=new MetodosAccesorios();
+                            MensajesAccesorios mensaje=accesorios.datosAccesoriosCQR(palabraAnterior,nick);
 
-                        if(mensaje.isOperacionExitosa()){
-                            this.myIntent = new Intent(TicketingCQR.this,TicketingDetalleCQR.class);
-                            myIntent.putExtra("ID_ACCEROSIO_TICKET", mensaje.getObjetoInventarios().getIdAccesorio());
-                            myIntent.putExtra("ID_ACTIVO_TICKET", 0);
-                            myIntent.putExtra("NOMBRE_LABORATORIO_TICKET","");
-                            myIntent.putExtra("NOMBRE_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getNombreAccesorio());
-                            myIntent.putExtra("MODELO_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getModeloAccesorio());
-                            myIntent.putExtra("SERIAL_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getSerialAccesorio());
-                            myIntent.putExtra("ESTADO_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getEstadoAccesorio());
-                            myIntent.putExtra("CQR_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getCadenaAccesorioCQR());
-                            myIntent.putExtra("ID_CQR_ACT_ACC_TICKET", elemento);
-                            startActivity(myIntent);
+                            if(mensaje.isOperacionExitosa()){
+                                this.myIntent = new Intent(TicketingCQR.this,TicketingDetalleCQR.class);
+                                myIntent.putExtra("ID_ACCEROSIO_TICKET", mensaje.getObjetoInventarios().getIdAccesorio());
+                                myIntent.putExtra("ID_ACTIVO_TICKET", 0);
+                                myIntent.putExtra("NOMBRE_LABORATORIO_TICKET","");
+                                myIntent.putExtra("NOMBRE_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getNombreAccesorio());
+                                myIntent.putExtra("MODELO_ACT_ACC_TICKET",mensaje.getObjetoInventarios().getModeloAccesorio());
+                                myIntent.putExtra("SERIAL_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getSerialAccesorio());
+                                myIntent.putExtra("ESTADO_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getEstadoAccesorio());
+                                myIntent.putExtra("CQR_ACT_ACC_TICKET", mensaje.getObjetoInventarios().getCadenaAccesorioCQR());
+                                myIntent.putExtra("ID_CQR_ACT_ACC_TICKET", palabraAnterior);
+                                startActivity(myIntent);
 
-                        }else {
+                            }else {
+                                this.myIntent = new Intent(TicketingCQR.this, TicketingPrincipal.class);
+                                myIntent.putExtra("OPERACION_TICK","NO_CQR");
+                                startActivity(myIntent);
                             /*Toast toast =
                                     Toast.makeText(getApplicationContext(),
                                             "Se ha Producido un error", Toast.LENGTH_LONG);
                             toast.show();*/
+                            }
+
+                        }else{
+                            this.myIntent = new Intent(TicketingCQR.this, TicketingPrincipal.class);
+                            myIntent.putExtra("OPERACION_TICK","NO_CQR");
+                            startActivity(myIntent);
                         }
 
-                    }else{
-                        this.myIntent = new Intent(TicketingCQR.this, TicketingPrincipal.class);
-                        myIntent.putExtra("OPERACION_TICK","NO_CQR");
-                        startActivity(myIntent);
+                        new Thread(new Runnable() {
+                            public void run() {
+                                try {
+                                    synchronized (this) {
+                                        wait(5000);
+                                        // limpiamos el token
+                                        palabraAnterior = "";
+                                    }
+                                } catch (InterruptedException e) {
+                                    // TODO Auto-generated catch block
+                                    Log.e("Error", "Waiting didnt work!!");
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
+
                     }
+
                 }
             }
         });
@@ -317,10 +346,14 @@ public class TicketingCQR extends AppCompatActivity
 
     public String instanciaActivo(String elemento){
         Log.e("elemento ",elemento);
+        String parteIdentificacion="";
         String[] parts = elemento.split("\\.");
-        Log.e("CQR: ", Arrays.toString(parts));
-        String parteIdentificacion = parts[1];
-        Log.e("CQR: ", parteIdentificacion);
+        if (parts.length > 1){
+            Log.e("CQR: ", Arrays.toString(parts));
+            parteIdentificacion = parts[1];
+            Log.e("CQR: ", parteIdentificacion);
+        }
+
         return parteIdentificacion;
     }
 

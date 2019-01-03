@@ -25,7 +25,7 @@ import ec.edu.ups.gestioninventarios.Modelos.Tickets;
 public class MetodosTickets {
     String conexion=AutenticarUsuario.conexion;
 
-    public MensajesTickets ingresarTicketActAcc(String nick,int idUsuario, int idActivo, int idAccesorio, String descripcion, String prioridad){
+    public MensajesTickets ingresarTicketActAcc(String nick,int idUsuario,String nombresUsuario, int idActivo, int idAccesorio, String descripcion, String prioridad,String nomActAcc){
         //Método para el web service de registrar login
         String METODO_WS="Tickets/RegistrarTicket";
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -52,11 +52,13 @@ public class MetodosTickets {
             //Métodos para enviar Datos al Web Service
             JSONObject jsonObjectEnvio=new JSONObject();
             jsonObjectEnvio.put("IdUsuario",idUsuario);
+            jsonObjectEnvio.put("NombreUsuario",nombresUsuario);
             jsonObjectEnvio.put("IdLaboratorio",0);
             jsonObjectEnvio.put("IdDetalleActivo",idActivo);
             jsonObjectEnvio.put("IdAccesorio",idAccesorio);
             jsonObjectEnvio.put("DescripcionTicket",descripcion);
             jsonObjectEnvio.put("PrioridadTicket",prioridad);
+            jsonObjectEnvio.put("NombreDetalleActivo",nomActAcc);
 
 
 
@@ -101,7 +103,7 @@ public class MetodosTickets {
         }
     }
 
-    public MensajesTickets ingresarTicketGeneral(String nick,int idUsuario, int idLab, String descripcion, String prioridad){
+    public MensajesTickets ingresarTicketGeneral(String nick,int idUsuario,String nombresUsuario, int idLab,String nombreLab, String descripcion, String prioridad){
         //Método para el web service de registrar login
         String METODO_WS="Tickets/RegistrarTicket";
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -127,12 +129,13 @@ public class MetodosTickets {
             //Métodos para enviar Datos al Web Service
             JSONObject jsonObjectEnvio=new JSONObject();
             jsonObjectEnvio.put("IdUsuario",idUsuario);
+            jsonObjectEnvio.put("NombreUsuario",nombresUsuario);
             jsonObjectEnvio.put("IdLaboratorio",idLab);
+            jsonObjectEnvio.put("NombreLaboratorio",nombreLab);
             jsonObjectEnvio.put("IdDetalleActivo",0);
             jsonObjectEnvio.put("IdAccesorio",0);
             jsonObjectEnvio.put("DescripcionTicket",descripcion);
             jsonObjectEnvio.put("PrioridadTicket",prioridad);
-
 
 
             DataOutputStream os=new DataOutputStream(conn.getOutputStream());
@@ -242,6 +245,9 @@ public class MetodosTickets {
                     ticketsUsuario.setComentarioEnProcesoTicket(jsonObject.optString("comentarioEnProcesoTicket"));
                     ticketsUsuario.setComentarioEnEsperaTicket(jsonObject.optString("comentarioEnEsperaTicket"));
                     ticketsUsuario.setComentarioResueltoTicket(jsonObject.optString("comentarioResueltoTicket"));
+                    ticketsUsuario.setIdLaboratorio(Integer.parseInt(jsonObject.optString("idLaboratorio")));
+                    ticketsUsuario.setIdDetalleActivo(Integer.parseInt(jsonObject.optString("idDetalleActivo")));
+                    ticketsUsuario.setIdAccesorio(Integer.parseInt(jsonObject.optString("idAccesorio")));
                     ticketsUsuario.setNombreLaboratorio(jsonObject.optString("nombreLaboratorio"));
                     ticketsUsuario.setNombreDetalleActivo(jsonObject.optString("nombreDetalleActivo"));
                     ticketsUsuario.setNombreAccesorio(jsonObject.optString("nombreAccesorio"));
@@ -250,8 +256,9 @@ public class MetodosTickets {
                 Log.e("Lista",ticket.get(0).getNombreLaboratorio());
                 return  ticket;
             }else{
+                ArrayList<Tickets> ticket=new ArrayList<Tickets>();
                 Log.e("VACIO ; ","NO VALIOOO");
-                return null;
+                return ticket;
             }
 
         } catch (Exception e) {

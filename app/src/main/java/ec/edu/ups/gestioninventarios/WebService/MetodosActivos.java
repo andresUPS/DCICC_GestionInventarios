@@ -73,7 +73,7 @@ public class MetodosActivos {
                 //Método para setear el valor de operacion exitosa y el mensaje de error
                 mensajesActivos.setOperacionExitosa(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")));
                 mensajesActivos.setMensajeError(jsonObjectRetorno.optString("mensajeError"));
-                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa"))){
+                if(Boolean.parseBoolean(jsonObjectRetorno.optString("operacionExitosa")) && jsonObjectRetorno.optString("objetoInventarios").contains("idActivo")){
                     //Método para llenar el modelo de Usuarios
                     Activos activo=new Activos();
                     JSONObject jsonActivo=new JSONObject(jsonObjectRetorno.optString("objetoInventarios"));
@@ -96,6 +96,7 @@ public class MetodosActivos {
                     mensajesActivos.setObjetoInventarios(activo);
 
                 }else{
+                    mensajesActivos.setOperacionExitosa(false);
                     mensajesActivos.setObjetoInventarios(null);
                 }
                 return  mensajesActivos;
@@ -168,8 +169,9 @@ public class MetodosActivos {
                 Log.e("Lista",lab.get(0).getNombreLaboratorio());
                 return  lab;
             }else{
+                ArrayList<Laboratorios> lab=new ArrayList<Laboratorios>();
                 Log.e("VACIO ; ","NO VALIOOO");
-                return null;
+                return lab;
             }
 
         } catch (Exception e) {

@@ -47,6 +47,7 @@ public class TicketingPrincipal extends AppCompatActivity
     public static int idUsuarioTicket=0;
     public static int idRolTicket=0;
     public static String nickUsuarioTicket=null;
+    public static String nombresUsuarioTicket=null;
     public static String correoUsuarioTicket=null;
     public static String rolUsuarioTicket=null;
     private String operacion;
@@ -187,6 +188,7 @@ public class TicketingPrincipal extends AppCompatActivity
     public void setearValoresSesion(Intent myIntentObtener){
         idUsuarioTicket=myIntentObtener.getExtras().getInt("ID_USUARIO_TICK");
         nickUsuarioTicket=myIntentObtener.getExtras().getString("NICK_USUARIO_TICK");
+        nombresUsuarioTicket=myIntentObtener.getExtras().getString("NOMBRES_USUARIO_TICK");
         correoUsuarioTicket=myIntentObtener.getExtras().getString("CORREO_USUARIO_TICK");
         idRolTicket=myIntentObtener.getExtras().getInt("ID_ROL_TICK");
         rolUsuarioTicket=myIntentObtener.getExtras().getString("NOMBRE_ROL_TICK");
