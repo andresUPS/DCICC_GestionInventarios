@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prioridad de la incidencia General: "
+                android:text="Prioridad de la incidencia general: "
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1.34"
                 android:textColor="@color/colorAccent" />
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:inputType="text|textMultiLine"
-                    android:hint="Descripción de la incidencia General"
+                    android:hint="Descripción de la incidencia general"
                     android:lines="8"
                     android:maxLines="5"
                     android:maxLength="500"
@@ -85,7 +85,6 @@
                     android:scrollbars="vertical"
                     android:digits="áéíóúÁÉÍÓÚ abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 0123456789?¡!¿./-_#%@,;:$*+"/>
             </android.support.design.widget.TextInputLayout>
-
 
         </LinearLayout>
     </ScrollView>

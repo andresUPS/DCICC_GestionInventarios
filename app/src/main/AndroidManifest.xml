@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".MyAppDynamicsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_icono_dcicc"
         android:label="@string/app_name"
@@ -44,12 +45,12 @@
             android:name=".Vistas.Activos.ActivosDetalle"
             android:label="@string/title_activity_activos_detalle"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Vistas.Activos.ActivosAccDetalle"
             android:label="@string/title_activity_accesorio_detalle"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Vistas.Ticketing.TicketingCQR"
             android:label="@string/title_activity_ticketing_cqr"
@@ -58,16 +59,19 @@
             android:name=".Vistas.Ticketing.TicketingDetalleCQR"
             android:label="@string/title_activity_ticketing_detalle_cqr"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Vistas.Ticketing.TicketingDetalleGene"
             android:label="@string/title_activity_ticketing_detalle_gene"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Vistas.Ticketing.TicketingConsulta"
             android:label="@string/title_activity_ticketing_consulta"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Vistas.Ticketing.TicketingLista"
+            android:label="@string/title_activity_ticketing_consulta"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

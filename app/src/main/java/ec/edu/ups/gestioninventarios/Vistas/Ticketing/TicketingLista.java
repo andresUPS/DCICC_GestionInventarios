@@ -18,9 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,18 +31,18 @@ import ec.edu.ups.gestioninventarios.R;
 import ec.edu.ups.gestioninventarios.WebService.AutenticarUsuario;
 import ec.edu.ups.gestioninventarios.WebService.MetodosTickets;
 
-public class TicketingConsulta extends AppCompatActivity
+public class TicketingLista extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // Referencias a los componentes de interfaz de usuario.
     private Intent myIntent;
-    private Button abiertos,enProceso,enEspera;
     int idUsuarioActual=TicketingPrincipal.idUsuarioTicket;
     String nick=TicketingPrincipal.nickUsuarioTicket;
     String correo=TicketingPrincipal.correoUsuarioTicket;
     ListViewAdapter adapter;
     private ListView lstCounts;
     private String operacionTicket;
+    int valorConsulta;
 
     ArrayList<Tickets> ticketsUsuario=new ArrayList<Tickets>();
     MetodosTickets tickets=new MetodosTickets();
@@ -51,7 +51,7 @@ public class TicketingConsulta extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticketing_consulta);
+        setContentView(R.layout.activity_ticketing_lista);
         // Variable para instanciar la barra horizontal de opciones de navegación
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,51 +71,11 @@ public class TicketingConsulta extends AppCompatActivity
         TextView txtCorreo = (TextView)v.findViewById(R.id.CorreoTickets);
         txtCorreo.setText(correo);
 
-        abiertos=(Button)findViewById(R.id.BotonAbiertos);
-        enProceso=(Button)findViewById(R.id.BotonEnProceso);
-        enEspera=(Button)findViewById(R.id.BotonEnEspera);
-
-        abiertos.setText("Tickets abiertos: "+TicketingPrincipal.abiertos);
-        enProceso.setText("Tickets en proceso: "+TicketingPrincipal.enProceso);
-        enEspera.setText("Tickets en espera: "+TicketingPrincipal.enEspera);
-
-        abiertos.setOnClickListener(new View.OnClickListener() {
-            public Intent myIntent;
-            @Override
-            public void onClick(View v) {
-                this.myIntent = new Intent(TicketingConsulta.this, TicketingLista.class);
-                myIntent.putExtra("OPERACION_CONSULTA", "ABIERTOS");
-                myIntent.putExtra("VALOR_CONSULTA", TicketingPrincipal.abiertos);
-                startActivity(myIntent);
-            }
-        });
-
-        enProceso.setOnClickListener(new View.OnClickListener() {
-            public Intent myIntent;
-            @Override
-            public void onClick(View v) {
-                this.myIntent = new Intent(TicketingConsulta.this, TicketingLista.class);
-                myIntent.putExtra("OPERACION_CONSULTA", "ENPROCESO");
-                myIntent.putExtra("VALOR_CONSULTA", TicketingPrincipal.enProceso);
-                startActivity(myIntent);
-            }
-        });
-
-        enEspera.setOnClickListener(new View.OnClickListener() {
-            public Intent myIntent;
-            @Override
-            public void onClick(View v) {
-                this.myIntent = new Intent(TicketingConsulta.this, TicketingLista.class);
-                myIntent.putExtra("OPERACION_CONSULTA", "ENESPERA");
-                myIntent.putExtra("VALOR_CONSULTA", TicketingPrincipal.enEspera);
-                startActivity(myIntent);
-            }
-        });
-
-        /*lstCounts = (ListView)findViewById(R.id.ConsultaTicketLst);
+        lstCounts = (ListView)findViewById(R.id.ConsultaTicketLst);
 
         Intent myIntentObtener = getIntent();
         operacionTicket=myIntentObtener.getExtras().getString("OPERACION_CONSULTA");
+        valorConsulta=myIntentObtener.getExtras().getInt("VALOR_CONSULTA");
 
         ticketsUsuario=tickets.ticketsReportados(idUsuarioActual,nick);
 
@@ -125,42 +85,87 @@ public class TicketingConsulta extends AppCompatActivity
                             "No existen tickets Reportados", Toast.LENGTH_LONG);
             toast.show();
         }else{
-            if(operacionTicket.equals("TOTALES")){
-                int tamanoLista=ticketsUsuario.size();
-                String[] estados=new String[tamanoLista];
-                String[] fechaAperturas=new String[tamanoLista];
-                String[] actLabAcc=new String[tamanoLista];
-                String[] responsables=new String[tamanoLista];
-                String[] comentarios=new String[tamanoLista];
+
+            if(operacionTicket.equals("ABIERTOS")){
+                //int tamanoLista=ticketsUsuario.size();
+                String[] estados=new String[valorConsulta];
+                String[] fechaAperturas=new String[valorConsulta];
+                String[] actLabAcc=new String[valorConsulta];
+                String[] responsables=new String[valorConsulta];
+                String[] comentarios=new String[valorConsulta];
+                int cont=0;
                 for (int i = 0; i < ticketsUsuario.size() ; i++) {
                     if(ticketsUsuario.get(i).getEstadoTicket().equals("ABIERTO")){
-                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaAperturaTicket();
-                        responsables[i]="";
-                        comentarios[i]=ticketsUsuario.get(i).getDescripcionTicket();
-                    }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN PROCESO")){
-                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnProcesoTicket();
-                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                        comentarios[i]=ticketsUsuario.get(i).getComentarioEnProcesoTicket();
-                    }else if(ticketsUsuario.get(i).getEstadoTicket().equals("EN ESPERA")){
-                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaEnEsperaTicket();
-                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                        comentarios[i]=ticketsUsuario.get(i).getComentarioEnEsperaTicket();
-                    }else{
-                        estados[i]=ticketsUsuario.get(i).getEstadoTicket();
-                        fechaAperturas[i]=ticketsUsuario.get(i).getFechaResueltoTicket();
-                        responsables[i]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
-                        comentarios[i]=ticketsUsuario.get(i).getComentarioResueltoTicket();
+                        estados[cont]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[cont]=ticketsUsuario.get(i).getFechaAperturaTicket();
+                        responsables[cont]="";
+                        comentarios[cont]=ticketsUsuario.get(i).getDescripcionTicket();
+                        if(ticketsUsuario.get(i).getIdLaboratorio()!=0){
+                            actLabAcc[cont]="Laboratorio: "+ticketsUsuario.get(i).getNombreLaboratorio();
+                        }else if(ticketsUsuario.get(i).getIdDetalleActivo()!=0){
+                            actLabAcc[cont]="Activo: "+ticketsUsuario.get(i).getNombreDetalleActivo();
+                        }else{
+                            actLabAcc[cont]="Accesorio: "+ticketsUsuario.get(i).getNombreAccesorio();
+                        }
+                        cont++;
                     }
 
-                    if(ticketsUsuario.get(i).getIdLaboratorio()!=0){
-                        actLabAcc[i]="Laboratorio: "+ticketsUsuario.get(i).getNombreLaboratorio();
-                    }else if(ticketsUsuario.get(i).getIdDetalleActivo()!=0){
-                        actLabAcc[i]="Activo: "+ticketsUsuario.get(i).getNombreDetalleActivo();
-                    }else{
-                        actLabAcc[i]="Accesorio: "+ticketsUsuario.get(i).getNombreAccesorio();
+
+                }
+                adapter=new ListViewAdapter(this,estados,fechaAperturas,responsables,comentarios,actLabAcc);
+                lstCounts.setAdapter(adapter);
+            } else if(operacionTicket.equals("ENPROCESO")){
+                //int valorConsulta=ticketsUsuario.size();
+                String[] estados=new String[valorConsulta];
+                String[] fechaAperturas=new String[valorConsulta];
+                String[] actLabAcc=new String[valorConsulta];
+                String[] responsables=new String[valorConsulta];
+                String[] comentarios=new String[valorConsulta];
+                int cont=0;
+                for (int i = 0; i < ticketsUsuario.size() ; i++) {
+                   if(ticketsUsuario.get(i).getEstadoTicket().equals("EN PROCESO")){
+                        estados[cont]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[cont]=ticketsUsuario.get(i).getFechaEnProcesoTicket();
+                        responsables[cont]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
+                        comentarios[cont]=ticketsUsuario.get(i).getComentarioEnProcesoTicket();
+                       if(ticketsUsuario.get(i).getIdLaboratorio()!=0){
+                           actLabAcc[cont]="Laboratorio: "+ticketsUsuario.get(i).getNombreLaboratorio();
+                       }else if(ticketsUsuario.get(i).getIdDetalleActivo()!=0){
+                           actLabAcc[cont]="Activo: "+ticketsUsuario.get(i).getNombreDetalleActivo();
+                       }else{
+                           actLabAcc[cont]="Accesorio: "+ticketsUsuario.get(i).getNombreAccesorio();
+                       }
+                       cont++;
+                    }
+
+
+
+
+                }
+                adapter=new ListViewAdapter(this,estados,fechaAperturas,responsables,comentarios,actLabAcc);
+                lstCounts.setAdapter(adapter);
+            }else if(operacionTicket.equals("ENESPERA")){
+                //int valorConsulta=ticketsUsuario.size();
+                String[] estados=new String[valorConsulta];
+                String[] fechaAperturas=new String[valorConsulta];
+                String[] actLabAcc=new String[valorConsulta];
+                String[] responsables=new String[valorConsulta];
+                String[] comentarios=new String[valorConsulta];
+                int cont=0;
+                for (int i = 0; i < ticketsUsuario.size() ; i++) {
+                    if(ticketsUsuario.get(i).getEstadoTicket().equals("EN ESPERA")){
+                        estados[cont]=ticketsUsuario.get(i).getEstadoTicket();
+                        fechaAperturas[cont]=ticketsUsuario.get(i).getFechaEnEsperaTicket();
+                        responsables[cont]=ticketsUsuario.get(i).getNombreUsuarioResponsable();
+                        comentarios[cont]=ticketsUsuario.get(i).getComentarioEnEsperaTicket();
+                        if(ticketsUsuario.get(i).getIdLaboratorio()!=0){
+                            actLabAcc[cont]="Laboratorio: "+ticketsUsuario.get(i).getNombreLaboratorio();
+                        }else if(ticketsUsuario.get(i).getIdDetalleActivo()!=0){
+                            actLabAcc[cont]="Activo: "+ticketsUsuario.get(i).getNombreDetalleActivo();
+                        }else{
+                            actLabAcc[cont]="Accesorio: "+ticketsUsuario.get(i).getNombreAccesorio();
+                        }
+                        cont++;
                     }
 
 
@@ -168,7 +173,7 @@ public class TicketingConsulta extends AppCompatActivity
                 adapter=new ListViewAdapter(this,estados,fechaAperturas,responsables,comentarios,actLabAcc);
                 lstCounts.setAdapter(adapter);
             }
-        }*/
+        }
 
 
 
@@ -229,21 +234,21 @@ public class TicketingConsulta extends AppCompatActivity
 
         if (id == R.id.ticketing_camera) {
             //Instancia a la vista que se genera al presionar el botón
-            this.myIntent = new Intent(TicketingConsulta.this, TicketingCQR.class);
+            this.myIntent = new Intent(TicketingLista.this, TicketingCQR.class);
             startActivity(myIntent);
         } else if (id == R.id.ticketing_inicio) {
             //Instancia a la vista que se genera al presionar el botón
-            this.myIntent = new Intent(TicketingConsulta.this, TicketingPrincipal.class);
+            this.myIntent = new Intent(TicketingLista.this, TicketingPrincipal.class);
             myIntent.putExtra("OPERACION_TICK","INICIO");
             startActivity(myIntent);
 
         }else if (id == R.id.ticketing_general) {
             //Instancia a la vista que se genera al presionar el botón
-            this.myIntent = new Intent(TicketingConsulta.this, TicketingDetalleGene.class);
+            this.myIntent = new Intent(TicketingLista.this, TicketingDetalleGene.class);
             startActivity(myIntent);
 
         } else if (id == R.id.consultar_tickets) {
-            this.myIntent = new Intent(TicketingConsulta.this, TicketingConsulta.class);
+            this.myIntent = new Intent(TicketingLista.this, TicketingConsulta.class);
             myIntent.putExtra("OPERACION_CONSULTA", "TOTALES");
             startActivity(myIntent);
         } else if (id == R.id.cerrar_sesion_tickets) {
@@ -262,3 +267,4 @@ public class TicketingConsulta extends AppCompatActivity
         return true;
     }
 }
+

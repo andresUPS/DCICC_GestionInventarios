@@ -1,4 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'adeum'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.appdynamics:appdynamics-gradle-plugin:4.5.5.1300'
+    }
+}
+
 
 android {
     compileSdkVersion 26
@@ -29,6 +40,7 @@ android {
 }
 
 repositories{
+    jcenter()
     maven {url "https://jitpack.io"}
 }
 
@@ -44,5 +56,5 @@ dependencies {
     //testCompile 'org.json:json:20180130'
     compile 'com.google.android.gms:play-services-vision:9.8.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-
+    compile 'com.appdynamics:appdynamics-runtime:4.5.5.1300'
 }

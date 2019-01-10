@@ -168,7 +168,7 @@ public class ActivosCQR extends AppCompatActivity
         //Instancia de el método para abrir la cámara posterior
         cameraSource = new CameraSource
                 .Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(2048, 1024)
+                .setRequestedPreviewSize(1024, 1024)
                 .setAutoFocusEnabled(true)
                 .build();
         

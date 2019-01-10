@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="N° de Tickets Reportados"
+        android:text="N° de tickets reportados"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/colorPrimary"

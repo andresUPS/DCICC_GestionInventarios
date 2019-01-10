@@ -50,9 +50,10 @@ public class TicketingPrincipal extends AppCompatActivity
     public static String nombresUsuarioTicket=null;
     public static String correoUsuarioTicket=null;
     public static String rolUsuarioTicket=null;
+
     private String operacion;
     PieChart pieChart;
-    int abiertos=0,enProceso=0,enEspera=0,resueltos=0;
+    public static int abiertos=0,enProceso=0,enEspera=0,resueltos=0;
     ArrayList<Tickets> ticketsUsuario=new ArrayList<Tickets>();
     MetodosTickets tickets=new MetodosTickets();
 

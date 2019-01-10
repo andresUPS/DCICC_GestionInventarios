@@ -173,22 +173,23 @@ public class AutenticarUsuario {
 
 
     public String getLocalIpAddress() {
+        String ip ="";
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
                 NetworkInterface intf = en.nextElement();
                 for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        String ip = (inetAddress.getHostAddress());
+                    if (inetAddress.isSiteLocalAddress()) {
+                        ip = (inetAddress.getHostAddress());
+                        Log.e("ip",ip);
 
-                        return ip;
                     }
                 }
             }
         } catch (SocketException ex) {
             Log.e("ip","no valio");
         }
-        return null;
+        return ip;
     }
 
     public void registrarLogs(String nick,String Operacion){

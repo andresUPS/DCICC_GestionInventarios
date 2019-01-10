@@ -57,11 +57,11 @@
                     android:id="@+id/NombreActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre Activo"
+                    android:hint="Nombre activo"
                     android:maxLines="1"
                     android:maxLength="150"
                     android:singleLine="false"
-                    android:digits="ABCDEFGHIJKLMÑNOPQRSTUVWXYZ1234567890.-_/"
+                    android:digits="ABCDEFGHIJKLMÑNOPQRSTUVWXYZÁÉÍÓÚ1234567890.-_/"
                     android:inputType="textFilter"/>
             </android.support.design.widget.TextInputLayout>
             <!-- Cuadro de texto para nombre de activo -->
@@ -72,7 +72,7 @@
                     android:id="@+id/MarcaActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Marca Activo"
+                    android:hint="Marca de activo"
                     android:maxLines="1"
                     android:maxLength="150"
                     android:singleLine="false"
@@ -87,7 +87,7 @@
                     android:id="@+id/ModeloActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Modelo Activo"
+                    android:hint="Modelo de activo"
                     android:maxLines="3"
                     android:maxLength="80"
                     android:singleLine="false"
@@ -102,7 +102,7 @@
                     android:id="@+id/SerialActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Serial Activo"
+                    android:hint="Serial de activo"
                     android:maxLines="3"
                     android:maxLength="150"
                     android:singleLine="false"
@@ -118,7 +118,7 @@
                     android:id="@+id/FechaAdquisicionActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Fecha de Adqusición"
+                    android:hint="Fecha de adqusición"
                     android:maxLines="1"
                     android:maxLength="10"
                     android:singleLine="true"
@@ -134,7 +134,7 @@
                     android:id="@+id/CustodioActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Custodio de Activo"
+                    android:hint="Custodio de activo"
                     android:maxLines="1"
                     android:maxLength="20"
                     android:singleLine="true"
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity=""
-                android:text="Ubicación del Activo: "
+                android:text="Ubicación del activo: "
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1.34"
                 android:textColor="@color/colorAccent" />
@@ -185,14 +185,14 @@
                         android:textColor="@color/colorPrimary"
                         android:gravity="left"
                         android:padding="8dip"
-                        android:text="Laboratorio Actual:"
+                        android:text="Laboratorio actual:"
                         android:layout_height="fill_parent" />
 
                     <TextView
                         android:layout_weight="1"
                         android:gravity="left"
                         android:padding="8dip"
-                        android:text="Laboratorio Nuevo:"
+                        android:text="Laboratorio nuevo:"
                         android:textColor="@color/colorPrimary"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent" />
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity=""
-                android:text="Estado de Activo: "
+                android:text="Estado de activo: "
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="2.78"
                 android:textColor="@color/colorAccent" />
@@ -247,14 +247,14 @@
                     android:textColor="@color/colorPrimary"
                     android:gravity="left"
                     android:padding="8dip"
-                    android:text="Estado Actual:"
+                    android:text="Estado actual:"
                     android:layout_height="fill_parent" />
 
                 <TextView
                     android:layout_weight="1"
                     android:gravity="left"
                     android:padding="8dip"
-                    android:text="Estado Nuevo:"
+                    android:text="Estado nuevo:"
                     android:textColor="@color/colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent" />
@@ -271,7 +271,6 @@
                     android:gravity="left"
                     android:padding="15dip"
                     android:maxLines="3"
-                    android:text="Dado de Baja"
                     android:layout_height="fill_parent" />
 
                 <!-- Combobox para laboratorio de activo-->

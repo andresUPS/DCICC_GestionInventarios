@@ -41,7 +41,7 @@ public class IngresoTicket {
     public void IngresoNuevoTicket() throws Exception{
         MetodosTickets tickets=new MetodosTickets();
         MensajesTickets mensajesTickets=new MensajesTickets();
-        mensajesTickets=tickets.ingresarTicketActAcc("docente1",34,120,0, "No se puede ingresar a la sesión de windows","ALTA");
+        mensajesTickets=tickets.ingresarTicketActAcc("docente1",34,"hola",120,0, "No se puede ingresar a la sesión de windows","ALTA","hola");
         assertTrue(mensajesTickets.isOperacionExitosa());
         assertTrue(mensajesTickets.getMensajeError()=="");
     }

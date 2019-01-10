@@ -7,7 +7,7 @@
 Opción Contulta de tickets-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content_ticketing_consulta"
+    android:id="@+id/content_ticketing_lista"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,45 +26,17 @@ Opción Contulta de tickets-->
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- ListView para el listado de tickets -->
-    <Button
-        android:id="@+id/BotonAbiertos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#00E68A"
-        android:text="PRUEBA DE LETRA"
-        android:textSize="20sp" />
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!-- ListView para el listado de tickets -->
-    <Button
-        android:id="@+id/BotonEnProceso"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#FFEB99"
-        android:text="PRUEBA DE LETRA"
-        android:textSize="20sp" />
-
-    <TextView
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Listado de tickets"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"/>
+    <!-- ListView para el listado de tickets -->
+    <ListView android:id="@+id/ConsultaTicketLst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <!-- ListView para el listado de tickets -->
-    <Button
-        android:id="@+id/BotonEnEspera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#FF8080"
-        android:text="PRUEBA DE LETRA"
-        android:textSize="20sp" />
 
 </LinearLayout>

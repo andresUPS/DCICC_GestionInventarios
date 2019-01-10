@@ -26,6 +26,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appdynamics.eumagent.runtime.AgentConfiguration;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+
 import ec.edu.ups.gestioninventarios.Modelos.Mensajes.MensajesUsuarios;
 import ec.edu.ups.gestioninventarios.Vistas.Activos.ActivosPrincipal;
 import ec.edu.ups.gestioninventarios.Vistas.Ticketing.TicketingPrincipal;
@@ -45,7 +48,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
+        Instrumentation.start(AgentConfiguration.builder()
+                .withContext(getApplicationContext())
+                .withAppKey("AD-AAB-AAN-HCK")
+                .build());
         // Métodos para llamar almacenar los valores de los componentes de la interfaz
         nickUsuario = (AutoCompleteTextView) findViewById(R.id.email);
         contrasenaUsuario = (EditText) findViewById(R.id.password);
