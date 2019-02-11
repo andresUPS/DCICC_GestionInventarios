@@ -85,7 +85,6 @@ public class TicketingLista extends AppCompatActivity
                             "No existen tickets Reportados", Toast.LENGTH_LONG);
             toast.show();
         }else{
-
             if(operacionTicket.equals("ABIERTOS")){
                 //int tamanoLista=ticketsUsuario.size();
                 String[] estados=new String[valorConsulta];

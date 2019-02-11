@@ -197,7 +197,10 @@ public class TicketingPrincipal extends AppCompatActivity
 
     public void contarTickets(){
         ticketsUsuario=tickets.ticketsReportados(idUsuarioTicket,nickUsuarioTicket);
-
+        abiertos=0;
+        enProceso=0;
+        enEspera=0;
+        resueltos=0;
         if (ticketsUsuario !=null){
             if(ticketsUsuario.size() !=0){
                 for (int i = 0; i < ticketsUsuario.size() ; i++) {
@@ -226,7 +229,7 @@ public class TicketingPrincipal extends AppCompatActivity
         yvalues.add(new PieEntry(valores[0], "ABIERTOS", 0));
         yvalues.add(new PieEntry(valores[1], "EN PROCESO", 1));
         yvalues.add(new PieEntry(valores[2], "EN ESPERA", 2));
-        yvalues.add(new PieEntry(valores[3], "DE BAJA", 3));
+        yvalues.add(new PieEntry(valores[3], "RESUELTOS", 3));
 
         PieDataSet dataSet = new PieDataSet(yvalues, "");
         dataSet.setSliceSpace(3f);

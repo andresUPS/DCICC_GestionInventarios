@@ -29,8 +29,8 @@ import ec.edu.ups.gestioninventarios.Modelos.Usuarios;
 
 public class AutenticarUsuario {
 
-    public static final String conexion="http://192.168.0.8/DCICC.WebServiceInventarios/";
-    //public static final String conexion="http://172.17.42.129/DCICC.WebServiceInventarios/";
+    //public static final String conexion="http://192.168.0.8/DCICC.WebServiceInventarios/";
+    public static final String conexion="http://172.17.42.129/DCICC.WebServiceInventarios/";
 
     public MensajesUsuarios loginInicio(String nick,String password){
         String METODO_WS="AccesoServicio/AutenticarUsuario";

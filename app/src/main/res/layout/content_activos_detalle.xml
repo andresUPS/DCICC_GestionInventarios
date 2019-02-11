@@ -118,7 +118,7 @@
                     android:id="@+id/FechaAdquisicionActivoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Fecha de adqusición"
+                    android:hint="Fecha de adquisición (yyyy-mm-dd)"
                     android:maxLines="1"
                     android:maxLength="10"
                     android:singleLine="true"
